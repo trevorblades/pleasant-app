@@ -14,9 +14,9 @@ export function App() {
   }, []);
 
   return (
-    <view className="flex h-screen flex-col pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]">
-      <view className="bg-red-200 px-10">
-        <text>hello what are you doing</text>
+    <view className="flex h-screen flex-col p-safe">
+      <view className="flex h-12 items-center justify-center border-b">
+        <text>hello what are you doings</text>
       </view>
     </view>
   );
