@@ -7,13 +7,15 @@
     "moduleResolution": "node16",
     "erasableSyntaxOnly": true,
     // Node.js 18+
-    "lib": [
-      "es2023"
-    ],
+    "lib": ["es2023"],
     "target": "es2022",
     "noEmit": true,
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "./schema.graphql"
+      }
+    ]
   },
-  "include": [
-    "./lynx.config.ts"
-  ],
+  "include": ["./lynx.config.ts"]
 }

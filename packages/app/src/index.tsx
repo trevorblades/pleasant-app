@@ -1,7 +1,7 @@
+import "url-search-params-polyfill";
 import "@lynx-js/preact-devtools";
-import { root } from "@lynx-js/react";
-import "@lynx-js/react/debug";
 
+import { root } from "@lynx-js/react";
 import { App } from "./App";
 
 root.render(<App />);

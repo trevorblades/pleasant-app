@@ -13,6 +13,14 @@
       "nursery": {
         "useSortedClasses": "warn"
       },
+      "style": {
+        "useConsistentObjectDefinitions": {
+          "level": "error",
+          "options": {
+            "syntax": "shorthand"
+          }
+        }
+      },
       "suspicious": {
         "noUnknownAtRules": {
           "level": "error",

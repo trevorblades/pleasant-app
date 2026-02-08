@@ -1,23 +1,8 @@
-import { createSchema, createYoga } from "graphql-yoga";
+import { createYoga } from "graphql-yoga";
+import { schema } from "./graphql";
 
-const yoga = createYoga({
-  schema: createSchema({
-    typeDefs: /* GraphQL */ `
-      type Query {
-        greetings: String
-      }
-    `,
-    resolvers: {
-      Query: {
-        greetings: () => "Hello from Yoga in a Bun app!",
-      },
-    },
-  }),
-});
-
-const server = Bun.serve({
-  fetch: yoga,
-});
+const yoga = createYoga({ schema });
+const server = Bun.serve({ fetch: yoga });
 
 console.info(
   `Server is running on ${new URL(
