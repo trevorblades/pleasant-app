@@ -1,14 +1,11 @@
-# Local
 .DS_Store
 *.local
 *.log*
 
-# Dist
 node_modules
 dist/
 
-# TypeScript
 *.tsbuildinfo
 
-src/gql
 schema.graphql
+src/graphql-env.d.ts

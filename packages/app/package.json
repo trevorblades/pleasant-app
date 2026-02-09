@@ -14,15 +14,12 @@
     "@lynx-js/react": "^0.116.2",
     "@tanstack/react-query": "^5.90.20",
     "@tanstack/react-router": "1.131.36",
+    "gql.tada": "^1.9.0",
     "graphql": "^16.12.0",
     "graphql-request": "^7.4.0",
     "url-search-params-polyfill": "^8.2.5"
   },
   "devDependencies": {
-    "@0no-co/graphqlsp": "^1.15.2",
-    "@graphql-codegen/cli": "^6.1.1",
-    "@graphql-codegen/client-preset": "^5.2.2",
-    "@graphql-codegen/schema-ast": "^5.0.0",
     "@lynx-js/preact-devtools": "^5.0.1",
     "@lynx-js/qrcode-rsbuild-plugin": "^0.4.4",
     "@lynx-js/react-rsbuild-plugin": "^0.12.7",

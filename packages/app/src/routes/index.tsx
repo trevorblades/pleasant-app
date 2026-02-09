@@ -1,5 +1,13 @@
 import type { FC } from "@lynx-js/react";
 import { createFileRoute } from "@tanstack/react-router";
+import { graphql } from "gql.tada";
+
+const HelloQuery = graphql(`
+  query Hello {
+    hello
+    foo
+  }
+`);
 
 const HomePage: FC = () => {
   const data = Route.useLoaderData();
