@@ -10,5 +10,5 @@ export const users = pgTable("users", {
 export const posts = pgTable("posts", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   title: text().notNull(),
-  userId: integer("user_id"),
+  userId: integer("user_id").notNull(),
 });

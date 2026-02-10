@@ -26,6 +26,16 @@ builder.drizzleObject("posts", {
   fields: (t) => ({
     id: t.exposeInt("id"),
     title: t.exposeString("title"),
+    user: t.relation("user"),
+  }),
+});
+
+builder.drizzleObject("users", {
+  name: "User",
+  fields: (t) => ({
+    id: t.exposeInt("id"),
+    name: t.exposeString("name"),
+    image: t.exposeString("image", { nullable: true }),
   }),
 });
 
@@ -52,12 +62,21 @@ builder.mutationType({
       input: {
         title: t.input.string({ required: true }),
       },
-      resolve: async (_, __, { input }) =>
-        db
+      resolve: async (_, __, { input }) => {
+        const [post] = await db
           .insert(posts)
-          .values(input)
-          .returning()
-          .then(([post]) => post!),
+          .values({
+            title: input.title,
+            userId: 123,
+          })
+          .returning();
+
+        if (!post) {
+          throw new Error("asdf"); // TODO
+        }
+
+        return post;
+      },
     }),
   }),
 });

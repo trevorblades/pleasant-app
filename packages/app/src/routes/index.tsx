@@ -59,7 +59,7 @@ const HomePage: FC = () => {
       <view className="flex h-12 items-center justify-center border-b">
         <text>All posts</text>
       </view>
-      <view className="flex flex-col gap-2">
+      <view className="flex flex-col gap-2 p-4">
         <input
           className="border"
           bindinput={(event) => {
