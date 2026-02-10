@@ -14,6 +14,7 @@
     "@lynx-js/react": "^0.116.2",
     "@tanstack/react-query": "^5.90.20",
     "@tanstack/react-router": "1.131.36",
+    "better-auth": "^1.4.18",
     "gql.tada": "^1.9.0",
     "graphql": "^16.12.0",
     "graphql-request": "^7.4.0",

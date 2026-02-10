@@ -1,16 +1,14 @@
 import SchemaBuilder from "@pothos/core";
 import DrizzlePlugin from "@pothos/plugin-drizzle";
 import WithInputPlugin from "@pothos/plugin-with-input";
-import { drizzle } from "drizzle-orm/node-postgres";
 import { getTableConfig } from "drizzle-orm/pg-core";
-import { relations } from "../db/relations";
+import { db } from "../db";
+import { type DrizzleRelations, relations } from "../db/relations";
 import { posts } from "../db/schema";
-
-const db = drizzle(process.env.DATABASE_URL ?? "", { relations });
 
 const builder = new SchemaBuilder<{
   DefaultFieldNullability: false;
-  DrizzleRelations: typeof relations;
+  DrizzleRelations: DrizzleRelations;
 }>({
   defaultFieldNullability: false,
   plugins: [DrizzlePlugin, WithInputPlugin],

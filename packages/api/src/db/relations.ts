@@ -1,6 +1,8 @@
 import { defineRelations } from "drizzle-orm";
 import * as schema from "./schema";
 
+export type DrizzleRelations = typeof relations;
+
 export const relations = defineRelations(schema, (r) => ({
   posts: {
     user: r.one.users({
