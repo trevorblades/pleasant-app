@@ -6,8 +6,9 @@ import { client } from "../gql";
 
 const HelloQuery = graphql(`
   query Hello {
-    hello(name: "foo")
-    foo(name: "bar")
+    posts {
+      title
+    }
   }
 `);
 
@@ -22,9 +23,7 @@ const HomePage: FC = () => {
   return (
     <view className="flex h-screen flex-col pt-[env(safe-area-inset-top)]">
       <view className="flex h-12 items-center justify-center border-b">
-        <text>
-          {data.hello} {data.foo} are you doings
-        </text>
+        <text>{data.posts.length} are you doings</text>
       </view>
       <view className="flex flex-col gap-2 p-4">
         <input
