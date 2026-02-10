@@ -4,7 +4,7 @@ import WithInputPlugin from "@pothos/plugin-with-input";
 import { getTableConfig } from "drizzle-orm/pg-core";
 import { db } from "../db";
 import { type DrizzleRelations, relations } from "../db/relations";
-import { posts } from "../db/schema";
+import { post } from "../db/schema";
 
 const builder = new SchemaBuilder<{
   DefaultFieldNullability: false;
@@ -19,7 +19,7 @@ const builder = new SchemaBuilder<{
   },
 });
 
-builder.drizzleObject("posts", {
+builder.drizzleObject("post", {
   name: "Post",
   fields: (t) => ({
     id: t.exposeInt("id"),
@@ -28,10 +28,10 @@ builder.drizzleObject("posts", {
   }),
 });
 
-builder.drizzleObject("users", {
+builder.drizzleObject("user", {
   name: "User",
   fields: (t) => ({
-    id: t.exposeInt("id"),
+    id: t.exposeString("id"),
     name: t.exposeString("name"),
     image: t.exposeString("image", { nullable: true }),
   }),
@@ -40,9 +40,9 @@ builder.drizzleObject("users", {
 builder.queryType({
   fields: (t) => ({
     posts: t.drizzleField({
-      type: ["posts"],
+      type: ["post"],
       resolve: (query) =>
-        db.query.posts.findMany(
+        db.query.post.findMany(
           query({
             orderBy: {
               id: "desc",
@@ -56,24 +56,24 @@ builder.queryType({
 builder.mutationType({
   fields: (t) => ({
     createPost: t.drizzleFieldWithInput({
-      type: "posts",
+      type: "post",
       input: {
         title: t.input.string({ required: true }),
       },
       resolve: async (_, __, { input }) => {
-        const [post] = await db
-          .insert(posts)
+        const [data] = await db
+          .insert(post)
           .values({
             title: input.title,
-            userId: 123,
+            userId: "abc",
           })
           .returning();
 
-        if (!post) {
+        if (!data) {
           throw new Error("asdf"); // TODO
         }
 
-        return post;
+        return data;
       },
     }),
   }),

@@ -6,7 +6,7 @@ import {
   createRouter,
   RouterProvider,
 } from "@tanstack/react-router";
-import { authClient } from "./auth";
+import { authClient } from "./lib/auth-client";
 import { routeTree } from "./routeTree.gen.js";
 
 const memoryHistory = createMemoryHistory({
@@ -45,6 +45,23 @@ export const App: FC = () => {
     return (
       <view>
         <text>something bad happened</text>
+      </view>
+    );
+  }
+
+  if (!session) {
+    return (
+      <view
+        bindtap={async () => {
+          const data = await authClient.signIn.social({
+            provider: "google",
+          });
+
+          console.log(data);
+        }}
+        className="h-12 bg-blue-100 px-4"
+      >
+        sign in w google
       </view>
     );
   }
