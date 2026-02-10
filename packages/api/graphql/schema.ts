@@ -7,14 +7,14 @@ builder.queryType({
     hello: t.string({
       nullable: false,
       args: {
-        name: t.arg.string(),
+        name: t.arg.string({ required: true }),
       },
       resolve: (_, { name }) => `hello ${name}`,
     }),
     foo: t.string({
       nullable: false,
       args: {
-        name: t.arg.string(),
+        name: t.arg.string({ required: true }),
       },
       resolve: (_, { name }) => `hello ${name}`,
     }),

@@ -1,32 +1,43 @@
 import type { FC } from "@lynx-js/react";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { graphql } from "gql.tada";
+import { client } from "../gql";
 
 const HelloQuery = graphql(`
   query Hello {
-    hello
-    foo
+    hello(name: "foo")
+    foo(name: "bar")
   }
 `);
 
+const helloQuery = queryOptions({
+  queryKey: ["hello"],
+  queryFn: () => client.request(HelloQuery),
+});
+
 const HomePage: FC = () => {
-  const data = Route.useLoaderData();
+  const { data, refetch } = useSuspenseQuery(helloQuery);
   return (
     <view className="flex h-screen flex-col pt-[env(safe-area-inset-top)]">
       <view className="flex h-12 items-center justify-center border-b">
-        <text>hello whatsss are you doings</text>
+        <text>
+          {data.hello} {data.foo} are you doings
+        </text>
+      </view>
+      <view
+        bindtap={() => {
+          refetch();
+        }}
+        accessibility-traits="button"
+      >
+        <text>refetch</text>
       </view>
     </view>
   );
 };
 
 export const Route = createFileRoute("/")({
-  loader: async () => {
-    return [
-      {
-        id: 123,
-      },
-    ];
-  },
+  loader: ({ context }) => context.queryClient.ensureQueryData(helloQuery),
   component: HomePage,
 });

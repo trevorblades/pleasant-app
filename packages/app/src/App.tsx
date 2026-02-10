@@ -12,22 +12,27 @@ const memoryHistory = createMemoryHistory({
   initialEntries: ["/"],
 });
 
+const queryClient = new QueryClient();
+
 const router = createRouter({
   routeTree,
   history: memoryHistory,
   isServer: false,
+  context: {
+    queryClient,
+  },
 });
 
-const queryClient = new QueryClient();
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
 
 export const App: FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <view className="flex h-screen flex-col pt-[env(safe-area-inset-top)]">
-        <view className="flex h-12 items-center justify-center border-b">
-          <text>hello whatz are you doings</text>
-        </view>
-      </view>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   );
 };

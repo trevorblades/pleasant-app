@@ -4,7 +4,6 @@ import { schema } from "../api/graphql";
 
 const config: CodegenConfig = {
   schema: printSchema(schema),
-  documents: ["src/**/*.tsx"],
   generates: {
     "./schema.graphql": {
       plugins: ["schema-ast"],
