@@ -1,4 +1,4 @@
-import type { FC } from "@lynx-js/react";
+import { type FC, useState } from "@lynx-js/react";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { graphql } from "gql.tada";
@@ -17,6 +17,7 @@ const helloQuery = queryOptions({
 });
 
 const HomePage: FC = () => {
+  const [value, setValue] = useState("");
   const { data, refetch } = useSuspenseQuery(helloQuery);
   return (
     <view className="flex h-screen flex-col pt-[env(safe-area-inset-top)]">
@@ -25,13 +26,21 @@ const HomePage: FC = () => {
           {data.hello} {data.foo} are you doings
         </text>
       </view>
-      <view
-        bindtap={() => {
-          refetch();
-        }}
-        accessibility-traits="button"
-      >
-        <text>refetch</text>
+      <view className="flex flex-col gap-2 p-4">
+        <input
+          className="border p-1"
+          bindinput={(event) => {
+            setValue(event.detail.value);
+          }}
+        />
+        <view
+          bindtap={() => {
+            refetch();
+          }}
+          accessibility-traits="button"
+        >
+          <text>refetch {value}</text>
+        </view>
       </view>
     </view>
   );
