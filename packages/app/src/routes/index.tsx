@@ -9,6 +9,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { graphql, type VariablesOf } from "gql.tada";
 import { PostDetails, PostDetailsFragment } from "../components/PostDetails";
 import { client } from "../gql";
+import { authClient } from "../lib/auth-client";
 
 const HelloQuery = graphql(
   `
@@ -66,6 +67,9 @@ const HomePage: FC = () => {
             setValue(event.detail.value);
           }}
         />
+        <view bindtap={async () => {}} className="h-12 bg-blue-100 px-4">
+          <text>sign in w google</text>
+        </view>
         <view
           bindtap={() => {
             if (!isPending) {

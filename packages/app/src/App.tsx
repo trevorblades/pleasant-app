@@ -31,41 +31,6 @@ declare module "@tanstack/react-router" {
 }
 
 export const App: FC = () => {
-  const { data: session, isPending, error } = authClient.useSession();
-
-  if (isPending) {
-    return (
-      <view>
-        <text>user loading</text>
-      </view>
-    );
-  }
-
-  if (error) {
-    return (
-      <view>
-        <text>something bad happened</text>
-      </view>
-    );
-  }
-
-  if (!session) {
-    return (
-      <view
-        bindtap={async () => {
-          const data = await authClient.signIn.social({
-            provider: "google",
-          });
-
-          console.log(data);
-        }}
-        className="h-12 bg-blue-100 px-4"
-      >
-        sign in w google
-      </view>
-    );
-  }
-
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />

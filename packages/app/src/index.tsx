@@ -1,4 +1,4 @@
-import "url-search-params-polyfill";
+import "core-js/features/url";
 import "@lynx-js/preact-devtools";
 
 import { root } from "@lynx-js/react";

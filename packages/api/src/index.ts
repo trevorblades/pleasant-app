@@ -5,12 +5,6 @@ import { schema } from "./graphql";
 
 const app = new Hono({ strict: false });
 
-app.use("*", async (c, next) => {
-  console.log(`[${c.req.method}] ${c.req.url}`);
-  console.log("Headers:", JSON.stringify(c.req.header()));
-  await next();
-});
-
 app.use(
   "/graphql",
   graphqlServer({
